@@ -25,10 +25,10 @@ geolite2_city_database 'default'
 
 ``` ruby
 # Get a full path to a GeoLite2 Country database
-::ChefCookbook::DHParam.file(node, 'default')  # /etc/chef-geolite2/country_default/GeoLite2-Country.mmdb
+::ChefCookbook::GeoLite2.country_database(node, 'default')  # /etc/chef-geolite2/country_default/GeoLite2-Country.mmdb
 
 # Get a full path to a GeoLite2 City database
-::ChefCookbook::DHParam.file(node, 'default')  # /etc/chef-geolite2/city_default/GeoLite2-City.mmdb
+::ChefCookbook::GeoLite2.city_database(node, 'default')  # /etc/chef-geolite2/city_default/GeoLite2-City.mmdb
 ```
 
 ## License
