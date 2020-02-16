@@ -3,6 +3,9 @@
 [![license](https://img.shields.io/github/license/aspyatkin/geolite2-cookbook.svg?style=flat-square)]()  
 Chef cookbook to download GeoLite2 Free databases from [MaxMind](https://dev.maxmind.com/geoip/geoip2/geolite2/).
 
+## Prerequisites
+MaxMind account license key is required in order to download GeoLite2 Free databases. Read more [here](https://blog.maxmind.com/2019/12/18/significant-changes-to-accessing-and-using-geolite2-databases/).
+
 ## Resources
 
 ### geolite2_country_database
@@ -10,7 +13,9 @@ Chef cookbook to download GeoLite2 Free databases from [MaxMind](https://dev.max
 Download the latest GeoLite2 Country database
 
 ``` ruby
-geolite2_country_database 'default'
+geolite2_country_database 'default' do
+  license_key 'ABCD...'  # MaxMind account license key
+end
 ```
 
 ### geolite2_city_database
@@ -18,7 +23,9 @@ geolite2_country_database 'default'
 Download the latest GeoLite2 City database
 
 ``` ruby
-geolite2_city_database 'default'
+geolite2_city_database 'default' do
+  license_key 'ABCD...'  # MaxMind account license key
+end
 ```
 
 ## Helpers

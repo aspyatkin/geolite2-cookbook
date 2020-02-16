@@ -4,8 +4,9 @@ require 'digest/md5'
 
 resource_name :geolite2_country_database
 
-property :url, String, default: 'http://geolite.maxmind.com/download/geoip/database/GeoLite2-Country.tar.gz'
-property :url_checksum, String, default: 'https://geolite.maxmind.com/download/geoip/database/GeoLite2-Country.tar.gz.md5'
+property :license_key, String, required: true
+property :url, String, default: 'https://download.maxmind.com/app/geoip_download?edition_id=GeoLite2-Country&license_key=%{license_key}&suffix=tar.gz'
+property :url_checksum, String, default: 'https://download.maxmind.com/app/geoip_download?edition_id=GeoLite2-Country&license_key=%{license_key}&suffix=tar.gz.md5'
 
 property :path, String, default: '/etc/chef-geolite2'
 
@@ -32,13 +33,16 @@ action :install do
     country_database_tarball
   )
 
+  download_url = new_resource.url % { license_key: new_resource.license_key }
+  download_url_checksum = new_resource.url_checksum % { license_key: new_resource.license_key}
+
   remote_file country_database_tarball_path do
-    source new_resource.url
+    source download_url
     use_conditional_get true
     use_etag true
     use_last_modified true
     verify do |path|
-      uri = URI(new_resource.url_checksum)
+      uri = URI(download_url_checksum)
       res = ::Net::HTTP.get_response(uri)
       if res.is_a?(::Net::HTTPSuccess)
         next res.body == ::Digest::MD5.file(path).hexdigest
