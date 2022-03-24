@@ -1,6 +1,6 @@
 name 'geolite2'
-maintainer 'Alexander Pyatkin'
-maintainer_email 'aspyatkin@gmail.com'
+maintainer 'Aleksandr Piatkin'
+maintainer_email 'oss@aptkn.ch'
 license 'MIT'
 description 'Download GeoLite2 databases'
 long_description ::IO.read(::File.join(::File.dirname(__FILE__), 'README.md'))
