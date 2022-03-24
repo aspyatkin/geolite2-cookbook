@@ -11,7 +11,8 @@ module ChefCookbook
       unless node.run_state.key?('geolite2')
         node.run_state['geolite2'] = {
           'country' => {},
-          'city' => {}
+          'city' => {},
+          'asn' => {}
         }
       end
     end
@@ -36,6 +37,10 @@ module ChefCookbook
 
     def self.city_database(node, item_name)
       _database(node, 'city', item_name)
+    end
+
+    def self.asn_database(node, item_name)
+      _database(node, 'asn', item_name)
     end
   end
 end

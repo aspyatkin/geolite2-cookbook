@@ -28,6 +28,16 @@ geolite2_city_database 'default' do
 end
 ```
 
+### geolite2_asn_database
+
+Download the latest GeoLite2 ASN database
+
+``` ruby
+geolite2_asn_database 'default' do
+  license_key 'ABCD...'  # MaxMind account license key
+end
+```
+
 ## Helpers
 
 ``` ruby
@@ -36,6 +46,10 @@ end
 
 # Get a full path to a GeoLite2 City database
 ::ChefCookbook::GeoLite2.city_database(node, 'default')  # /etc/chef-geolite2/city_default/GeoLite2-City.mmdb
+```
+
+# Get a full path to a GeoLite2 ASN database
+::ChefCookbook::GeoLite2.asn_database(node, 'default')  # /etc/chef-geolite2/asn_default/GeoLite2-ASN.mmdb
 ```
 
 ## License
