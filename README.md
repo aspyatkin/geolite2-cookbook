@@ -52,4 +52,4 @@ end
 ```
 
 ## License
-MIT @ [Alexander Pyatkin](https://github.com/aspyatkin)
+MIT @ [Aleksandr Piatkin](https://github.com/aspyatkin)

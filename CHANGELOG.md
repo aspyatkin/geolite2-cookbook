@@ -10,7 +10,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 Add function to download the Maxmind Geolite2 ASN database.
 
 ### Added
-- Added `geolite2_asn_database` function. 
+- Added `geolite2_asn_database` function.
 
 ## [2.0.0] - 2020-02-16
 
