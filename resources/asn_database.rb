@@ -6,7 +6,7 @@ resource_name :geolite2_asn_database
 
 property :license_key, String, required: true
 property :url, String, default: 'https://download.maxmind.com/app/geoip_download?edition_id=GeoLite2-ASN&license_key=%{license_key}&suffix=tar.gz'
-property :url_checksum, String, default: 'https://download.maxmind.com/app/geoip_download?edition_id=GeoLite2-ASN&license_key=%{license_key}&suffix=tar.gz.md5'
+property :url_checksum, String, default: 'https://download.maxmind.com/app/geoip_download?edition_id=GeoLite2-ASN&license_key=%{license_key}&suffix=tar.gz.sha256'
 
 property :path, String, default: '/etc/chef-geolite2'
 
@@ -38,18 +38,7 @@ action :install do
 
   remote_file asn_database_tarball_path do
     source download_url
-    use_conditional_get true
-    use_etag true
-    use_last_modified true
-    verify do |path|
-      uri = URI(download_url_checksum)
-      res = ::Net::HTTP.get_response(uri)
-      if res.is_a?(::Net::HTTPSuccess)
-        next res.body == ::Digest::MD5.file(path).hexdigest
-      else
-        next false
-      end
-    end
+    checksum lazy { ::ChefCookbook::GeoLite2.get_checksum(node, 'asn', download_url_checksum) }
     mode 0644
   end
 
